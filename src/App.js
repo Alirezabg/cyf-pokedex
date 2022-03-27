@@ -1,25 +1,49 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import Logo from "./Logo";
+import { useState } from "react";
 
-function App() {
+
+
+const App = () => {
+  const logWhenClicked = () => {
+    console.log(`hello world`);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Logo handleClick={logWhenClicked} />
+      <BestPokemon />
+      <CaughtPokemon />
     </div>
   );
-}
+};
+const CaughtPokemon = () => {
+  const [pokemonCatched, setpokemonCatched] = useState(0);
+  const increaseCatchPockemon = () => {
+    setpokemonCatched((pockemon) => pockemon + 1);
+  };
+  const date = new Date().toLocaleDateString();
+  return (
+    <>
+      <p>
+        Caught {pokemonCatched} Pokemon on{date}
+      </p>
+      <button onClick={increaseCatchPockemon}> increase Pockemon</button>
+    </>
+  );
+};
 
+const BestPokemon = () => {
+  const abilities = ["Anticipation", "Adaptability", "Run-Away"];
+  return (
+    <div>
+      <p>My favorite Pokemon is Squirtle</p>
+      <ul>
+        {abilities.map((pokemon) => (
+          <li>{pokemon}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
 export default App;
